@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="slip-stage">
-  <div class="slip">
+  <div class="slip" style="max-width:540px;">
     <div class="slip-head">
       <a href="index.html" class="brand-lockup">
         <img src="assets/mark_gold.png" alt="" class="brand-mark" />
@@ -22,13 +22,117 @@
     <div class="slip-body">
       <span class="eyebrow">Deploy</span>
       <h1>Ship your bot.</h1>
-      <p class="desc">One-click deploy straight from a GitHub repo, or upload a bot archive directly. Either way, you're live in under a minute.</p>
-      <a href="#" class="btn btn-primary">Deploy from GitHub <span class="arrow">→</span></a>
+      <p class="desc">Connect GitHub once — every repo you push to becomes deployable from here, no archives to upload.</p>
+
+      <div class="connect-card">
+        <!-- disconnected state -->
+        <div id="ghDisconnected" class="connect-row">
+          <span class="connect-label">
+            <svg class="gh-icon" viewBox="0 0 16 16" fill="currentColor" style="color:var(--bone);"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+            <span>
+              GitHub
+              <small>Not connected — link an account to deploy from a repo</small>
+            </span>
+          </span>
+          <button id="ghConnectBtn" class="btn btn-primary" type="button">Connect GitHub <span class="arrow">→</span></button>
+        </div>
+
+        <!-- connected state -->
+        <div id="ghConnected" style="display:none;">
+          <div class="gh-status">
+            <span class="who"><span class="dot"></span> CONNECTED — <span id="ghUserLabel"></span></span>
+            <button id="ghDisconnectBtn" class="gh-disconnect" type="button">Disconnect</button>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="ghRepo">Repository</label>
+              <select id="ghRepo">
+                <option value="">Select a repo…</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="ghBranch">Branch</label>
+              <select id="ghBranch">
+                <option value="main">main</option>
+                <option value="dev">dev</option>
+                <option value="release">release</option>
+              </select>
+            </div>
+          </div>
+          <button id="ghDeployBtn" class="btn btn-primary btn-block" type="button" disabled>Deploy from GitHub <span class="arrow">→</span></button>
+          <div id="deployLog" class="deploy-log"><span class="dot"></span><span id="deployLogText"></span></div>
+        </div>
+      </div>
+
+      <p class="upload-alt">or <a href="#">upload a bot archive</a> instead</p>
     </div>
     <div class="slip-foot">
       <a href="index.html" class="back-link"><span class="arrow">←</span> back to home</a>
+      <span class="owned-by">Owned by ItIsNow</span>
     </div>
   </div>
 </div>
+
+<script>
+  const disconnectedEl = document.getElementById('ghDisconnected');
+  const connectedEl = document.getElementById('ghConnected');
+  const userLabel = document.getElementById('ghUserLabel');
+  const repoSelect = document.getElementById('ghRepo');
+  const branchSelect = document.getElementById('ghBranch');
+  const deployBtn = document.getElementById('ghDeployBtn');
+  const deployLog = document.getElementById('deployLog');
+  const deployLogText = document.getElementById('deployLogText');
+
+  const DEMO_REPOS = ['music-bot', 'mod-bot', 'ticket-bot', 'economy-bot'];
+
+  function renderConnected(username) {
+    disconnectedEl.style.display = 'none';
+    connectedEl.style.display = 'block';
+    userLabel.textContent = 'github.com/' + username;
+    repoSelect.innerHTML = '<option value="">Select a repo…</option>' +
+      DEMO_REPOS.map(r => `<option value="${username}/${r}">${username}/${r}</option>`).join('');
+  }
+
+  function renderDisconnected() {
+    disconnectedEl.style.display = 'flex';
+    connectedEl.style.display = 'none';
+    deployLog.classList.remove('show');
+    deployBtn.disabled = true;
+    deployBtn.textContent = '';
+    deployBtn.innerHTML = 'Deploy from GitHub <span class="arrow">→</span>';
+  }
+
+  const saved = localStorage.getItem('goldenGithub');
+  if (saved) {
+    try {
+      const data = JSON.parse(saved);
+      renderConnected(data.username);
+    } catch (e) { renderDisconnected(); }
+  }
+
+  document.getElementById('ghConnectBtn').addEventListener('click', () => {
+    const username = prompt('GitHub username to connect:');
+    if (!username) return;
+    localStorage.setItem('goldenGithub', JSON.stringify({ username }));
+    renderConnected(username);
+  });
+
+  document.getElementById('ghDisconnectBtn').addEventListener('click', () => {
+    localStorage.removeItem('goldenGithub');
+    renderDisconnected();
+  });
+
+  repoSelect.addEventListener('change', () => {
+    deployBtn.disabled = !repoSelect.value;
+    deployLog.classList.remove('show');
+  });
+
+  deployBtn.addEventListener('click', () => {
+    if (!repoSelect.value) return;
+    deployLogText.textContent = 'DEPLOY QUEUED — ' + repoSelect.value + '@' + branchSelect.value;
+    deployLog.classList.add('show');
+    deployBtn.innerHTML = 'Redeploy <span class="arrow">→</span>';
+  });
+</script>
 </body>
 </html>

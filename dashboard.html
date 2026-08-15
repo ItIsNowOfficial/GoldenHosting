@@ -1,135 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard · Golden Hosting</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #0d0b10;
-      background-image: radial-gradient(circle at 15% 20%, #1f1a24 0%, #0a080e 90%);
-      font-family: 'Inter', sans-serif;
-      color: #eae6f0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-    .dashboard {
-      max-width: 600px;
-      width: 100%;
-      background: rgba(18, 15, 24, 0.85);
-      backdrop-filter: blur(4px);
-      border-radius: 3rem;
-      padding: 3rem 2.5rem;
-      border: 1px solid rgba(255, 215, 0, 0.12);
-      box-shadow: 0 25px 50px -8px rgba(0,0,0,0.8);
-      text-align: center;
-    }
-    .dashboard .logo-img {
-      height: 64px;
-      width: auto;
-      filter: drop-shadow(0 0 12px rgba(245, 184, 27, 0.25));
-      background: rgba(0,0,0,0.2);
-      padding: 6px 14px;
-      border-radius: 18px;
-      border: 1px solid rgba(255, 215, 0, 0.08);
-      margin-bottom: 1rem;
-    }
-    .dashboard h1 {
-      font-size: 2.4rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #f9d976 0%, #e6a800 80%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 0.5rem;
-    }
-    .dashboard .sub {
-      color: #b3a3c0;
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-    }
-    .dashboard .user-info {
-      background: rgba(255, 215, 0, 0.04);
-      border: 1px solid rgba(255, 215, 0, 0.08);
-      border-radius: 60px;
-      padding: 0.8rem 1.5rem;
-      display: inline-block;
-      margin-bottom: 2rem;
-      color: #f5d06a;
-    }
-    .dashboard .btn-row {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .btn-gold {
-      background: linear-gradient(145deg, #f5c542, #d99f10);
-      border: none;
-      color: #0d0b10;
-      font-weight: 600;
-      padding: 0.7rem 1.8rem;
-      border-radius: 40px;
-      font-size: 0.95rem;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      box-shadow: 0 6px 14px rgba(245, 184, 27, 0.25);
-      transition: all 0.15s ease;
-    }
-    .btn-gold:hover { transform: scale(1.02); background: linear-gradient(145deg, #fcd15a, #e6ad1a); }
-    .btn-outline {
-      background: transparent;
-      border: 1px solid #f5b81b;
-      color: #f5d06a;
-      padding: 0.7rem 1.8rem;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: 0.2s;
-    }
-    .btn-outline:hover { background: #f5b81b; color: #0d0b10; }
-    .back-home {
-      display: inline-block;
-      margin-top: 1.8rem;
-      color: #9a8aa8;
-      text-decoration: none;
-      font-size: 0.8rem;
-      transition: 0.2s;
-    }
-    .back-home:hover { color: #f5b81b; }
-    .back-home i { margin-right: 4px; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard · Golden Hosting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-<div class="dashboard">
-  <img src="logo.png" alt="Golden Hosting" class="logo-img" onerror="this.style.display='none'" />
-  <h1><i class="fas fa-crown" style="color:#f5b81b;font-size:2rem;"></i> Dashboard</h1>
-  <p class="sub">Your bot hosting control center</p>
+<div class="slip-stage">
+  <div class="slip" style="max-width:500px;">
+    <div class="slip-head">
+      <a href="index.html" class="brand-lockup">
+        <img src="assets/mark_gold.png" alt="" class="brand-mark" />
+        <span class="wordmark">Golden <em>Hosting</em></span>
+      </a>
+      <span class="slip-num">CONTROL CENTER</span>
+    </div>
+    <div class="slip-body">
+      <span class="eyebrow">Dashboard</span>
+      <h1>Your bots, at a glance.</h1>
+      <p class="desc" style="margin-bottom:1.2rem;">Deploy, monitor and manage every bot slot on your plan from here.</p>
 
-  <div id="userDisplay" class="user-info"><i class="fas fa-user"></i> Loading...</div>
+      <div id="userDisplay" class="readout"><span class="dot"></span> reading session…</div>
 
-  <div class="btn-row">
-    <a href="deploy.html" class="btn-gold"><i class="fas fa-rocket"></i> Deploy Bot</a>
-    <a href="support.html" class="btn-outline"><i class="fas fa-headset"></i> Support</a>
-  </div>
-  <div style="margin-top:1rem;">
-    <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> back to home</a>
+      <div class="action-row">
+        <a href="deploy.html" class="btn btn-primary">Deploy bot <span class="arrow">→</span></a>
+        <a href="support.html" class="btn btn-line">Support</a>
+      </div>
+    </div>
+    <div class="slip-foot">
+      <a href="index.html" class="back-link"><span class="arrow">←</span> back to home</a>
+    </div>
   </div>
 </div>
 
@@ -139,10 +43,13 @@
   if (session) {
     try {
       const data = JSON.parse(session);
-      userDisplay.innerHTML = '<i class="fas fa-user"></i> Welcome, ' + data.name + ' (' + data.email + ')';
-    } catch (e) { userDisplay.textContent = 'Welcome back!'; }
+      userDisplay.innerHTML = '<span class="dot"></span> SESSION — ' + data.name + ' · ' + data.email;
+    } catch (e) {
+      userDisplay.innerHTML = '<span class="dot"></span> SESSION — welcome back';
+    }
   } else {
-    userDisplay.innerHTML = '<i class="fas fa-exclamation-circle"></i> Not logged in. <a href="login.html" style="color:#f5b81b;">Login</a>';
+    userDisplay.classList.add('warn');
+    userDisplay.innerHTML = '<span class="dot"></span> NOT SIGNED IN — <a href="login.html">log in</a>';
   }
 </script>
 </body>

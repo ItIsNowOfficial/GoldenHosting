@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support · Golden Hosting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0d0b10;
+      background-image: radial-gradient(circle at 15% 20%, #1f1a24 0%, #0a080e 90%);
+      font-family: 'Inter', sans-serif;
+      color: #eae6f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .card {
+      max-width: 500px;
+      width: 100%;
+      background: rgba(18, 15, 24, 0.85);
+      backdrop-filter: blur(4px);
+      border-radius: 3rem;
+      padding: 3rem 2.5rem;
+      border: 1px solid rgba(255, 215, 0, 0.12);
+      box-shadow: 0 25px 50px -8px rgba(0,0,0,0.8);
+      text-align: center;
+    }
+    .card .logo-img {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 0 12px rgba(245, 184, 27, 0.25));
+      background: rgba(0,0,0,0.2);
+      padding: 6px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 215, 0, 0.08);
+      margin-bottom: 1rem;
+    }
+    .card h1 { font-size: 2.4rem; font-weight: 700; background: linear-gradient(135deg, #f9d976 0%, #e6a800 80%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .card p { color: #b3a3c0; font-size: 1.1rem; margin: 0.5rem 0 1.5rem; }
+    .btn-gold {
+      background: linear-gradient(145deg, #f5c542, #d99f10);
+      border: none;
+      color: #0d0b10;
+      font-weight: 600;
+      padding: 0.7rem 1.8rem;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 6px 14px rgba(245, 184, 27, 0.25);
+      transition: all 0.15s ease;
+    }
+    .btn-gold:hover { transform: scale(1.02); background: linear-gradient(145deg, #fcd15a, #e6ad1a); }
+    .back-home { display: inline-block; margin-top: 1.8rem; color: #9a8aa8; text-decoration: none; font-size: 0.8rem; transition: 0.2s; }
+    .back-home:hover { color: #f5b81b; }
+    .back-home i { margin-right: 4px; }
+  </style>
+</head>
+<body>
+<div class="card">
+  <img src="logo.png" alt="Golden Hosting" class="logo-img" onerror="this.style.display='none'" />
+  <h1><i class="fas fa-headset" style="color:#f5b81b;"></i> Support</h1>
+  <p>24/7 human support — Discord tickets, email, and live chat.</p>
+  <a href="#" class="btn-gold"><i class="fab fa-discord"></i> Join Discord</a>
+  <div style="margin-top:1rem;"><a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> back to home</a></div>
+</div>
+</body>
+</html>

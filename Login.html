@@ -1,243 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login · Golden Hosting</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..600;1,14..32,400..600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #0d0b10;
-      background-image: radial-gradient(circle at 15% 20%, #1f1a24 0%, #0a080e 90%);
-      font-family: 'Inter', sans-serif;
-      color: #eae6f0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-    }
-    .auth-container {
-      width: 100%;
-      max-width: 420px;
-      background: rgba(18, 15, 24, 0.85);
-      backdrop-filter: blur(4px);
-      border-radius: 3rem;
-      padding: 2.8rem 2.5rem 2.5rem;
-      border: 1px solid rgba(255, 215, 0, 0.12);
-      box-shadow: 0 25px 50px -8px rgba(0,0,0,0.8), 0 0 0 1px rgba(255, 215, 0, 0.05);
-    }
-    .auth-logo {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 2rem;
-      text-decoration: none;
-    }
-    .auth-logo img {
-      height: 64px;
-      width: auto;
-      filter: drop-shadow(0 0 12px rgba(245, 184, 27, 0.25));
-      background: rgba(0,0,0,0.2);
-      padding: 6px 14px;
-      border-radius: 18px;
-      border: 1px solid rgba(255, 215, 0, 0.08);
-      margin-bottom: 0.5rem;
-    }
-    .auth-logo h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #f9d976 0%, #e6a800 80%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .auth-logo h1 i { color: #f5b81b; font-size: 1.4rem; }
-    .auth-logo span {
-      font-weight: 400;
-      color: #9a8aa8;
-      font-size: 0.75rem;
-      background: rgba(255, 215, 0, 0.06);
-      padding: 0.15rem 0.9rem;
-      border-radius: 30px;
-      border: 1px solid rgba(255, 215, 0, 0.08);
-      margin-top: -2px;
-    }
-    .form-group { margin-bottom: 1.4rem; }
-    .form-group label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #b3a3c0;
-      margin-bottom: 0.3rem;
-    }
-    .form-group input {
-      width: 100%;
-      padding: 0.8rem 1.2rem;
-      border-radius: 60px;
-      border: 1px solid #2f2838;
-      background: #12101a;
-      color: #f0eae6;
-      font-size: 0.95rem;
-      transition: 0.2s;
-      outline: none;
-      font-family: 'Inter', sans-serif;
-    }
-    .form-group input:focus { border-color: #f5b81b; box-shadow: 0 0 0 3px rgba(245, 184, 27, 0.12); }
-    .form-group input::placeholder { color: #5d4f68; }
-    .form-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: -0.2rem;
-      margin-bottom: 1.8rem;
-    }
-    .form-row a {
-      color: #f5b81b;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: 0.2s;
-    }
-    .form-row a:hover { text-decoration: underline; color: #fad05a; }
-    .btn-gold {
-      width: 100%;
-      background: linear-gradient(145deg, #f5c542, #d99f10);
-      border: none;
-      color: #0d0b10;
-      font-weight: 700;
-      padding: 0.85rem;
-      border-radius: 60px;
-      font-size: 1rem;
-      cursor: pointer;
-      box-shadow: 0 6px 18px rgba(245, 184, 27, 0.25);
-      transition: all 0.15s ease;
-      font-family: 'Inter', sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-    }
-    .btn-gold:hover { transform: scale(1.01); background: linear-gradient(145deg, #fcd15a, #e6ad1a); box-shadow: 0 8px 24px rgba(245, 184, 27, 0.4); }
-    .auth-message {
-      margin-top: 1.2rem;
-      padding: 0.7rem 1rem;
-      border-radius: 40px;
-      font-size: 0.9rem;
-      text-align: center;
-      display: none;
-      background: rgba(245, 184, 27, 0.06);
-      border: 1px solid rgba(245, 184, 27, 0.08);
-    }
-    .auth-message.show { display: block; }
-    .auth-message.error { color: #f87171; border-color: rgba(248, 113, 113, 0.2); background: rgba(248, 113, 113, 0.05); }
-    .auth-message.success { color: #a3e635; border-color: rgba(163, 230, 53, 0.15); background: rgba(163, 230, 53, 0.04); }
-    .auth-footer {
-      margin-top: 1.8rem;
-      text-align: center;
-      font-size: 0.85rem;
-      color: #7a6a88;
-      border-top: 1px solid rgba(255, 215, 0, 0.04);
-      padding-top: 1.4rem;
-    }
-    .auth-footer a { color: #f5b81b; text-decoration: none; font-weight: 500; }
-    .auth-footer a:hover { text-decoration: underline; }
-    .back-home {
-      display: inline-block;
-      margin-top: 0.8rem;
-      color: #9a8aa8;
-      text-decoration: none;
-      font-size: 0.8rem;
-      transition: 0.2s;
-    }
-    .back-home:hover { color: #f5b81b; }
-    .back-home i { margin-right: 4px; }
-    @media (max-width: 480px) { .auth-container { padding: 2rem 1.5rem; border-radius: 2rem; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login to Continue</title>
+<style>
+  :root{
+    --ink: #2d3742;
+    --ink-soft: #4a5568;
+    --card: #ffffff;
+    --field-border: #d6dce3;
+    --field-border-error: #e8877f;
+    --error-text: #e8877f;
+    --accent-blue: #1e5fd9;
+    --accent-blue-hover: #184dae;
+    --link: #4a6fb5;
+    --rex-body: #c8752f;
+    --rex-body-dark: #a85e22;
+    --rex-belly: #e69551;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: var(--ink);
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    padding: 24px;
+  }
+  .page{
+    width:100%;
+    max-width:760px;
+  }
+  h1.title{
+    color:#eef1f5;
+    text-align:center;
+    font-size:1.9rem;
+    font-weight:700;
+    margin: 0 0 24px 0;
+    letter-spacing:.2px;
+  }
+  .card{
+    background: var(--card);
+    border-radius: 10px;
+    padding: 40px;
+    display:grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.35);
+  }
+  .mascot-wrap{
+    border: 2px solid #e8877f;
+    border-radius: 6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 10px;
+  }
+  .mascot-wrap svg{ width:100%; height:auto; display:block; }
+
+  form{ display:flex; flex-direction:column; }
+  label{
+    font-size: .72rem;
+    font-weight:700;
+    letter-spacing: .06em;
+    color: var(--ink-soft);
+    margin-bottom:8px;
+    text-transform:uppercase;
+  }
+  input{
+    width:100%;
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1.5px solid var(--field-border);
+    font-size: .95rem;
+    outline:none;
+    color:var(--ink);
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  input:focus{
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(30,95,217,.15);
+  }
+  input.error{
+    border-color: var(--field-border-error);
+  }
+  .error-msg{
+    color: var(--error-text);
+    font-size: .8rem;
+    margin: 6px 0 0 0;
+    min-height: 1.1em;
+  }
+  .field{ margin-bottom: 18px; }
+  .field:nth-of-type(1){ margin-bottom: 22px; }
+
+  button.login-btn{
+    margin-top: 6px;
+    background: var(--accent-blue);
+    color:#fff;
+    border:none;
+    border-radius: 6px;
+    padding: 14px;
+    font-size: .85rem;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition: background .15s ease, transform .05s ease;
+  }
+  button.login-btn:hover{ background: var(--accent-blue-hover); }
+  button.login-btn:active{ transform: translateY(1px); }
+  button.login-btn:disabled{ opacity:.7; cursor:progress; }
+
+  .forgot{
+    text-align:center;
+    margin-top: 18px;
+    font-size: .78rem;
+    letter-spacing:.04em;
+  }
+  .forgot a{
+    color: var(--link);
+    text-decoration:none;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+  .forgot a:hover{ text-decoration:underline; }
+
+  .success{
+    display:none;
+    background:#e7f6ec;
+    border:1px solid #a9dcb9;
+    color:#276b3d;
+    padding:12px 14px;
+    border-radius:6px;
+    font-size:.85rem;
+    margin-bottom:16px;
+  }
+
+  @media (max-width: 560px){
+    .card{ grid-template-columns: 1fr; padding: 28px; }
+    .mascot-wrap{ max-width: 220px; margin: 0 auto; }
+  }
+
+  input:focus-visible, button:focus-visible, a:focus-visible{
+    outline: 3px solid #8fb4ff;
+    outline-offset: 2px;
+  }
+</style>
 </head>
 <body>
-
-<div class="auth-container">
-  <a href="index.html" class="auth-logo">
-    <img src="logo.png" alt="Golden Hosting" onerror="this.style.display='none'" />
-    <h1><i class="fas fa-crown"></i> Golden Hosting</h1>
-    <span>discord · premium</span>
-  </a>
-
-  <form id="loginForm" autocomplete="off">
-    <div class="form-group">
-      <label for="loginEmail"><i class="far fa-envelope" style="margin-right:6px;"></i> Username or Email</label>
-      <input type="text" id="loginEmail" placeholder="Enter your username or email" required />
+<div class="page">
+  <h1 class="title">Login to Continue</h1>
+  <div class="card">
+    <div class="mascot-wrap">
+      <svg viewBox="0 0 245 240" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#5865F2" d="M104.4 103.9c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1.1-6.1-4.5-11.1-10.2-11.1zm36.2 0c-5.7 0-10.2 5-10.2 11.1s4.6 11.1 10.2 11.1c5.7 0 10.2-5 10.2-11.1s-4.5-11.1-10.2-11.1z"/>
+        <path fill="#5865F2" d="M189.5 20h-134C42.1 20 32 30.1 32 42.6v135.7c0 12.5 10.1 22.6 22.5 22.6h113.4l-5.3-18.5 12.8 11.9 12.1 11.2 21.5 19V42.6C209 30.1 198.9 20 186.4 20h3.1zM152 158.4s-3.6-4.3-6.6-8.1c13.1-3.7 18.1-11.9 18.1-11.9-4.1 2.7-8 4.6-11.5 5.9-5 2.1-9.8 3.5-14.5 4.3-9.6 1.8-18.4 1.3-25.9-.1-5.7-1.1-10.6-2.7-14.7-4.3-2.3-.9-4.8-2-7.3-3.4-.3-.2-.6-.3-.9-.5-.2-.1-.3-.2-.4-.3-1.8-1-2.8-1.7-2.8-1.7s4.8 8 17.5 11.8c-3 3.8-6.7 8.3-6.7 8.3-22.1-.7-30.5-15.2-30.5-15.2 0-32.2 14.4-58.3 14.4-58.3 14.4-10.8 28.1-10.5 28.1-10.5l1 1.2c-18 5.2-26.3 13.1-26.3 13.1s2.2-1.2 5.9-2.9c10.7-4.7 19.2-6 22.7-6.3.6-.1 1.1-.2 1.7-.2 6.1-.8 13-1 20.2-.2 9.5 1.1 19.7 3.9 30.1 9.6 0 0-7.9-7.5-24.9-12.7l1.4-1.6s13.7-.3 28.1 10.5c0 0 14.4 26.1 14.4 58.3 0-.1-8.4 14.4-30.5 15.1z"/>
+      </svg>
     </div>
-    <div class="form-group">
-      <label for="loginPassword"><i class="fas fa-lock" style="margin-right:6px;"></i> Password</label>
-      <input type="password" id="loginPassword" placeholder="Enter your password" required />
-    </div>
-    <div class="form-row">
-      <a href="#" id="forgotLink"><i class="fas fa-question-circle"></i> Forgot password?</a>
-    </div>
-    <button type="submit" class="btn-gold"><i class="fas fa-sign-in-alt"></i> Login</button>
-    <div id="loginMessage" class="auth-message"></div>
-  </form>
 
-  <div class="auth-footer">
-    Don't have an account? <a href="signup.html">Sign up</a>
-    <br />
-    <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> back to home</a>
+    <div>
+      <div class="success" id="successMsg">You're logged in. Welcome back!</div>
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="username">Username or Email</label>
+          <input type="text" id="username" name="username" autocomplete="username">
+          <p class="error-msg" id="usernameError"></p>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" autocomplete="current-password">
+          <p class="error-msg" id="passwordError"></p>
+        </div>
+        <button type="submit" class="login-btn" id="submitBtn">Login</button>
+        <p class="forgot"><a href="#" id="forgotLink">Forgot Password?</a></p>
+      </form>
+    </div>
   </div>
 </div>
 
 <script>
-  (function() {
-    const loginForm = document.getElementById('loginForm');
-    const loginMsg = document.getElementById('loginMessage');
+  const form = document.getElementById('loginForm');
+  const username = document.getElementById('username');
+  const password = document.getElementById('password');
+  const usernameError = document.getElementById('usernameError');
+  const passwordError = document.getElementById('passwordError');
+  const submitBtn = document.getElementById('submitBtn');
+  const successMsg = document.getElementById('successMsg');
 
-    function showMessage(el, text, type = '') {
-      el.textContent = text;
-      el.className = 'auth-message show ' + type;
+  function clearError(input, errorEl){
+    input.classList.remove('error');
+    errorEl.textContent = '';
+  }
+  function setError(input, errorEl, message){
+    input.classList.add('error');
+    errorEl.textContent = message;
+  }
+
+  username.addEventListener('input', () => { if(username.value.trim()) clearError(username, usernameError); });
+  password.addEventListener('input', () => { if(password.value) clearError(password, passwordError); });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    successMsg.style.display = 'none';
+    let valid = true;
+
+    if(!username.value.trim()){
+      setError(username, usernameError, 'A username or email must be provided.');
+      valid = false;
+    } else {
+      clearError(username, usernameError);
     }
 
-    loginForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = document.getElementById('loginEmail').value.trim();
-      const password = document.getElementById('loginPassword').value.trim();
+    if(!password.value){
+      setError(password, passwordError, 'Please enter your account password.');
+      valid = false;
+    } else {
+      clearError(password, passwordError);
+    }
 
-      if (!email || !password) {
-        showMessage(loginMsg, '⚠️ Please fill in both fields.', 'error');
-        return;
-      }
+    if(!valid) return;
 
-      let users = JSON.parse(localStorage.getItem('goldenUsers') || '[]');
-      const found = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
-      if (found) {
-        showMessage(loginMsg, '✅ Welcome back, ' + found.name + '! Redirecting…', 'success');
-        localStorage.setItem('goldenSession', JSON.stringify({ email: found.email, name: found.name }));
-        setTimeout(() => { window.location.href = 'dashboard.html'; }, 1200);
-      } else {
-        const exists = users.some(u => u.email.toLowerCase() === email.toLowerCase());
-        showMessage(loginMsg, exists ? '❌ Incorrect password.' : '❌ No account found. Please sign up.', 'error');
-      }
-    });
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Logging in…';
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Login';
+      successMsg.style.display = 'block';
+      form.reset();
+    }, 900);
+  });
 
-    document.getElementById('forgotLink').addEventListener('click', function(e) {
-      e.preventDefault();
-      const email = document.getElementById('loginEmail').value.trim();
-      if (!email) { showMessage(loginMsg, '📧 Please enter your email address first.', 'error'); return; }
-      let users = JSON.parse(localStorage.getItem('goldenUsers') || '[]');
-      const found = users.find(u => u.email.toLowerCase() === email.toLowerCase());
-      showMessage(loginMsg, found ? '🔑 Reset link sent to ' + email + ' (demo).' : '❌ No account found.', found ? 'success' : 'error');
-    });
-  })();
+  document.getElementById('forgotLink').addEventListener('click', function(e){
+    e.preventDefault();
+    alert('Password reset flow goes here.');
+  });
 </script>
 </body>
 </html>

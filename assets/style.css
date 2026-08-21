@@ -8,7 +8,7 @@
 
 :root{
   /* --- color --- */
-  --ink:        #0f0d0a;   /* page background, warm near-black */
+  --ink:        #fcfcfc;   /* page background, warm near-black */
   --panel:      #17130f;   /* card fill */
   --panel-2:    #1c1811;   /* raised card fill */
   --line:       rgba(203,161,74,0.20);   /* hairline rule */
